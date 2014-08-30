@@ -39,6 +39,17 @@ describe("rc.npm", function () {
       expect(config).to.deep.equal(output);
     });
   });
+  it("supports node style API", function (done) {
+    var root = path.join(__dirname, "..");
+    rc.generate({
+      dependencies: readDependencies(root),
+      resolve: resolveNodeStyle,
+      location: createLocation
+    }, function (err, config) {
+      expect(config).to.deep.equal(output);
+      done();
+    });
+  });
 });
 
 function readDependencies(path) {
@@ -59,7 +70,13 @@ function resolve(name, version, basedir) {
   });
 }
 
+function resolveNodeStyle(name, version, basedir, cb) {
+  resolveModule(name + "/package.json", {basedir: basedir}, function (err, location) {
+    if (err) return cb(err);
+    cb(null, path.dirname(location));
+  });
+}
+
 function createLocation(manifest) {
   return "pkg/" + uid.create(manifest.name, manifest.version);
 }
-

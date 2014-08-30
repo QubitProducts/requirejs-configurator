@@ -53,4 +53,10 @@ describe("rc.npm", function () {
       expect(config).to.deep.equal(output);
     });
   });
+  it("supports node style API", function (done) {
+    rc.npm(path.join(__dirname, ".."), function (err, config) {
+      expect(config).to.deep.equal(output);
+      done();
+    });
+  });
 });

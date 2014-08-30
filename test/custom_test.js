@@ -1,12 +1,12 @@
-var rc = require("../");
+var _ = require("lodash");
+var R = require("ramda");
 var path = require("path");
 var expect = require("chai").expect;
-
-var _ = require("lodash");
 var when = require("when");
 var path = require("path");
 var resolveModule = require("resolve");
-var uid = require("../lib/uid");
+
+var rc = require("../");
 
 var output = {
   map: {
@@ -33,9 +33,9 @@ describe("rc.npm", function () {
     var root = path.join(__dirname, "..");
     return rc.generate({
       dependencies: readDependencies(root),
-      resolve: resolve,
-      location: createLocation
+      resolve: resolve
     }).then(function (config) {
+      config.packages = rewriteLocation(config.packages);
       expect(config).to.deep.equal(output);
     });
   });
@@ -43,9 +43,9 @@ describe("rc.npm", function () {
     var root = path.join(__dirname, "..");
     rc.generate({
       dependencies: readDependencies(root),
-      resolve: resolveNodeStyle,
-      location: createLocation
+      resolve: resolveNodeStyle
     }, function (err, config) {
+      config.packages = rewriteLocation(config.packages);
       expect(config).to.deep.equal(output);
       done();
     });
@@ -77,6 +77,13 @@ function resolveNodeStyle(name, version, basedir, cb) {
   });
 }
 
-function createLocation(manifest) {
-  return "pkg/" + uid.create(manifest.name, manifest.version);
+function createLocation(pkgUid) {
+  return "pkg/" + pkgUid;
+}
+
+function rewriteLocation(pkgs) {
+  return R.map(function (pkg) {
+    pkg.location = createLocation(pkg.name);
+    return pkg;
+  }, pkgs);
 }

@@ -32,7 +32,6 @@ describe("rc.npm", function () {
   it("generates configuration for an npm based project", function () {
     var root = path.join(__dirname, "..");
     return rc.generate({
-      root: root,
       dependencies: readDependencies(root),
       resolve: resolve,
       location: location

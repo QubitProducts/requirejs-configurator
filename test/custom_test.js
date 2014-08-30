@@ -34,7 +34,7 @@ describe("rc.npm", function () {
     return rc.generate({
       dependencies: readDependencies(root),
       resolve: resolve,
-      location: location
+      location: createLocation
     }).then(function (config) {
       expect(config).to.deep.equal(output);
     });
@@ -59,7 +59,7 @@ function resolve(name, version, basedir) {
   });
 }
 
-function location(manifest) {
+function createLocation(manifest) {
   return "pkg/" + uid.create(manifest.name, manifest.version);
 }
 

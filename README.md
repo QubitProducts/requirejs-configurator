@@ -40,3 +40,54 @@ rc.generate({
 ```
 
 Note that the `options.resolve` function can either take a callback or return a promise.
+
+# Example Output
+
+Here is what the output of generating configuration for `requirejs-configurator` itself looks like (Backbone is in there just to demonstrate nested dependencies). With such configuration, it's then possible to call `require("lodash")` or `require("lodash@2.4.1") or `require("lodash@^2.4.1") and all nested dependencies are resolved correctly since they're configured in the map.
+
+```js
+{
+  map: {
+    'backbone@1.1.2': {
+      underscore: 'underscore@1.7.0'
+    },
+    '*': {
+      'backbone': 'backbone@1.1.2',
+      'lodash': 'lodash@^2.4.1',
+      'lodash@^2.4.1': 'lodash@2.4.1',
+      'ramda': 'ramda@^0.4.0',
+      'ramda@^0.4.0': 'ramda@0.4.0',
+      "resolve": "resolve@^1.0.0",
+      'resolve@^1.0.0': 'resolve@1.0.0',
+      'when@^3.4.4': 'when@3.4.4',
+      'when': 'when@^3.4.4',
+      'underscore@>=1.5.0': 'underscore@1.7.0'
+    }
+  },
+  packages: [{
+    name: 'backbone@1.1.2',
+    main: 'backbone.js',
+    location: 'node_modules/backbone'
+  }, {
+    name: 'lodash@2.4.1',
+    main: 'dist/lodash.js',
+    location: 'node_modules/lodash'
+  }, {
+    name: 'ramda@0.4.0',
+    main: 'ramda.js',
+    location: 'node_modules/ramda'
+  }, {
+    name: 'resolve@1.0.0',
+    main: 'index.js',
+    location: 'node_modules/resolve'
+  }, {
+    name: 'when@3.4.4',
+    main: 'when',
+    location: 'node_modules/when'
+  }, {
+    name: 'underscore@1.7.0',
+    main: 'underscore.js',
+    location: 'node_modules/backbone/node_modules/underscore'
+  }]
+};
+```

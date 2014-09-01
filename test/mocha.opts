@@ -1,3 +1,2 @@
---recursive
 --reporter spec
-test/**/*_test.js
+test/*_test.js

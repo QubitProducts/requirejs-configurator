@@ -14,7 +14,8 @@ var output = {
       underscore: 'underscore@1.7.0'
     },
     '*': {
-      'underscore@>=1.5.0': 'underscore@1.7.0'
+      'underscore@>=1.5.0': 'underscore@1.7.0',
+      "when@^3.4.4": 'when@3.4.4'
     }
   },
   packages: [{
@@ -22,15 +23,19 @@ var output = {
     main: 'backbone.js',
     location: 'pkg/backbone@1.1.2'
   }, {
+    location: 'pkg/when@3.4.4',
+    main: 'when',
+    name: 'when@3.4.4'
+  }, {
     name: 'underscore@1.7.0',
     main: 'underscore.js',
     location: 'pkg/underscore@1.7.0'
   }]
 };
 
-describe("rc.npm", function () {
+describe("rc.generate", function () {
   it("generates configuration for an npm based project", function () {
-    var root = path.join(__dirname, "..");
+    var root = path.join(__dirname, "fixture");
     return rc.generate({
       dependencies: readDependencies(root),
       resolve: resolve
@@ -40,7 +45,7 @@ describe("rc.npm", function () {
     });
   });
   it("supports node style API", function (done) {
-    var root = path.join(__dirname, "..");
+    var root = path.join(__dirname, "fixture");
     rc.generate({
       dependencies: readDependencies(root),
       resolve: resolveNodeStyle
@@ -54,9 +59,7 @@ describe("rc.npm", function () {
 
 function readDependencies(path) {
   return _.reduce(require(path + "/package.json").dependencies, function (memo, version, dep) {
-    if (dep === "backbone") {
-      memo.push(dep + "@" + version);
-    }
+    memo.push(dep + "@" + version);
     return memo;
   }, []);
 }

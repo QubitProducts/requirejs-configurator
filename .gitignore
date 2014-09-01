@@ -1,1 +1,4 @@
+.DS_Store
 node_modules
+!test/fixture/node_modules
+!test/fixture/node_modules/backbone/node_modules

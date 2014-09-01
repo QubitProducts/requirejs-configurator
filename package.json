@@ -1,0 +1,21 @@
+{
+  "name": "requirejs-configurator",
+  "version": "1.0.0",
+  "description": "A generic require.js configuration generator for npm style projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "ramda": "^0.4.0",
+    "resolve": "^1.0.0",
+    "when": "^3.4.4"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4"
+  }
+}

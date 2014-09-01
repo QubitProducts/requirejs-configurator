@@ -1,0 +1,16 @@
+{
+  "name": "test-fixture",
+  "version": "1.0.0",
+  "description": "A fake node_modules tree for tests",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "backbone": "1.1.2",
+    "when": "^3.4.4"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4"
+  }
+}

@@ -10,7 +10,7 @@ var output = {
     '*': {
       'backbone': 'backbone@1.1.2',
       'when@^3.4.4': 'when@3.4.4',
-      'when': 'when@^3.4.4',
+      'when': 'when@3.4.4',
       'underscore@>=1.5.0': 'underscore@1.7.0'
     }
   },

@@ -43,7 +43,7 @@ Note that the `options.resolve` function can either take a callback or return a 
 
 # Example Output
 
-Here is what the output of generating configuration for `requirejs-configurator` itself looks like (Backbone is in there just to demonstrate nested dependencies). With such configuration, it's then possible to call `require("lodash")` or `require("lodash@2.4.1") or `require("lodash@^2.4.1") and all nested dependencies are resolved correctly since they're configured in the map.
+Here is what the output of generating configuration for `requirejs-configurator` itself looks like (Backbone is in there just to demonstrate nested dependencies). With such configuration, it's then possible to call `require("lodash")` or `require("lodash@2.4.1") or `require("lodash@^2.4.1")` and all nested dependencies are resolved correctly since they're configured in the map.
 
 ```js
 {

@@ -38,7 +38,7 @@ describe("rc.generate", function () {
     var root = path.join(__dirname, "fixture");
     return rc.generate({
       dependencies: readDependencies(root),
-      resolve: resolve
+      resolve: makeResolve(root)
     }).then(function (config) {
       config.packages = rewriteLocation(config.packages);
       expect(config).to.deep.equal(output);
@@ -48,8 +48,9 @@ describe("rc.generate", function () {
     var root = path.join(__dirname, "fixture");
     rc.generate({
       dependencies: readDependencies(root),
-      resolve: resolveNodeStyle
+      resolve: makeResolveNodeStyle(root)
     }, function (err, config) {
+      if (err) return done(err);
       config.packages = rewriteLocation(config.packages);
       expect(config).to.deep.equal(output);
       done();
@@ -64,20 +65,24 @@ function readDependencies(path) {
   }, []);
 }
 
-function resolve(name, version, basedir) {
-  return when.promise(function (resolve, reject) {
-    resolveModule(name + "/package.json", {basedir: basedir}, function (err, location) {
-      if (err) return reject(err);
-      resolve(path.dirname(location));
+function makeResolve(root) {
+  return function resolve(name, version, basedir) {
+    return when.promise(function (resolve, reject) {
+      resolveModule(name + "/package.json", {basedir: basedir || root}, function (err, location) {
+        if (err) return reject(err);
+        resolve(path.dirname(location));
+      });
     });
-  });
+  }
 }
 
-function resolveNodeStyle(name, version, basedir, cb) {
-  resolveModule(name + "/package.json", {basedir: basedir}, function (err, location) {
-    if (err) return cb(err);
-    cb(null, path.dirname(location));
-  });
+function makeResolveNodeStyle(root) {
+  return function resolveNodeStyle(name, version, basedir, cb) {
+    resolveModule(name + "/package.json", {basedir: basedir || root}, function (err, location) {
+      if (err) return cb(err);
+      cb(null, path.dirname(location));
+    });
+  }
 }
 
 function createLocation(pkgUid) {

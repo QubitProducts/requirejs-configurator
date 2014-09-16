@@ -8,6 +8,8 @@ var output = {
       'underscore': 'underscore@1.7.0'
     },
     '*': {
+      '@qubit/moment': '@qubit/moment@2.8.3',
+      '@qubit/moment@^2.8.3': '@qubit/moment@2.8.3',
       'backbone': 'backbone@1.1.2',
       'when@^3.4.4': 'when@3.4.4',
       'when': 'when@3.4.4',
@@ -22,6 +24,10 @@ var output = {
     name: 'when@3.4.4',
     main: 'when',
     location: 'node_modules/when'
+  }, {
+    location: 'node_modules/@qubit/moment',
+    main: './moment.js',
+    name: '@qubit/moment@2.8.3'
   }, {
     name: 'underscore@1.7.0',
     main: 'underscore.js',

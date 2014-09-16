@@ -14,8 +14,9 @@ var output = {
       underscore: 'underscore@1.7.0'
     },
     '*': {
-      'underscore@>=1.5.0': 'underscore@1.7.0',
-      "when@^3.4.4": 'when@3.4.4'
+      '@qubit/moment@^2.8.3': '@qubit/moment@2.8.3',
+      'when@^3.4.4': 'when@3.4.4',
+      'underscore@>=1.5.0': 'underscore@1.7.0'
     }
   },
   packages: [{
@@ -23,9 +24,13 @@ var output = {
     main: 'backbone.js',
     location: 'pkg/backbone@1.1.2'
   }, {
-    location: 'pkg/when@3.4.4',
+    name: 'when@3.4.4',
     main: 'when',
-    name: 'when@3.4.4'
+    location: 'pkg/when@3.4.4'
+  }, {
+    location: 'pkg/@qubit/moment@2.8.3',
+    main: './moment.js',
+    name: '@qubit/moment@2.8.3'
   }, {
     name: 'underscore@1.7.0',
     main: 'underscore.js',
@@ -73,7 +78,7 @@ function makeResolve(root) {
         resolve(path.dirname(location));
       });
     });
-  }
+  };
 }
 
 function makeResolveNodeStyle(root) {
@@ -82,7 +87,7 @@ function makeResolveNodeStyle(root) {
       if (err) return cb(err);
       cb(null, path.dirname(location));
     });
-  }
+  };
 }
 
 function createLocation(pkgUid) {

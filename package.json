@@ -12,7 +12,8 @@
     "lodash": "^2.4.1",
     "ramda": "^0.4.0",
     "resolve": "^1.0.0",
-    "when": "^3.4.4"
+    "when": "^3.4.4",
+    "pkguid": "git+ssh://git@github.com/qubitdigital/pkguid#91b1b0866"
   },
   "devDependencies": {
     "chai": "^1.9.1",

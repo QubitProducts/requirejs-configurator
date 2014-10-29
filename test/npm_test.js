@@ -11,6 +11,8 @@ var output = {
       '@qubit/moment': '@qubit/moment@2.8.3',
       '@qubit/moment@^2.8.3': '@qubit/moment@2.8.3',
       'backbone': 'backbone@1.1.2',
+      "index": "../browser",
+      "promise": "when@3.4.4",
       'when@^3.4.4': 'when@3.4.4',
       'when': 'when@3.4.4',
       'underscore@>=1.5.0': 'underscore@1.7.0'

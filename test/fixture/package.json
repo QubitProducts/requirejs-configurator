@@ -10,6 +10,10 @@
     "when": "^3.4.4",
     "@qubit/moment": "^2.8.3"
   },
+  "browser": {
+    "index": "../browser",
+    "promise": "when"
+  },
   "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.21.4"

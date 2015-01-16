@@ -1,8 +1,10 @@
-# Require.js configurator
+# requirejs-configurator
 
-A generic require.js map/package configuration generator.
+A generic require.js map/package configuration generator. It can generate require.js from arbitrary package layout on disk.
 
-# Usage
+*requirejs-configurator* is not intended as the best workflow in terms of web app development (check out webpack, browserify, Rave.js). It's more of a building block for other tools. It's quite a specialised package so to speak. It supports `npm`'s package layout out of the box so it could prove to be useful for simple Require.js/Cajon based projects.
+
+# Programmatic usage
 
 `requirejs-configurator` can be used to generate configuration for npm based projects.
 
@@ -10,7 +12,7 @@ A generic require.js map/package configuration generator.
 var rc = require("requirejs-configurator");
 ```
 
-You can use the promise API
+There is a promise API
 
 ```js
 rc.npm("path/to/my/project").then(function () {
@@ -18,7 +20,7 @@ rc.npm("path/to/my/project").then(function () {
 });
 ```
 
-Or the node style API
+And the node style callback API
 
 ```js
 rc.npm("path/to/my/project", function (err, config) {
@@ -32,7 +34,10 @@ Use `generate` for more advanced use cases, e.g.
 rc.generate({
   dependencies: ["foo@^1.0.0", "bar@*"],
   resolve: function (name, version, basedir, cb) {
-    // npm config generator uses the `node-resolve` which uses node"s `node_modules` traversal algorithm, but with a custom resolver we could do other things, like have our files laid out in a flat structure
+    // npm config generator uses the `node-resolve` which uses node"s
+    // `node_modules` traversal algorithm. By providing a custom resolver
+    // it's possible to support different package layouts, e.g. a flat
+    // structure with package@version directories, etc.
     cb(null path.resolve(__dirname, "base", name, version));
   }
 });
@@ -41,7 +46,17 @@ rc.generate({
 
 Note that the `options.resolve` function can either take a callback or return a promise.
 
-# Example Output
+# Command line usage
+
+There's a small command line tool bundled with `requirejs-configurator` which can generate a configuration file for npm based projects, use it like so:
+
+```
+requirejs-configurator --npm . > config.js
+```
+
+This assumes that `node_modules` will be served at your require.js baseUrl. If that's not the case, you'll have to use the programmatic API and modify the generated configuration by looping over the packages array and updating the location fields.
+
+# Example output
 
 Here is what the output of generating configuration for `requirejs-configurator` itself looks like (+ Backbone just to demonstrate nested dependencies). With such configuration, it's then possible to call `require("lodash")` or `require("lodash@2.4.1")` or `require("lodash@^2.4.1")` and all nested dependencies are resolved correctly since they're configured in the map.
 
@@ -91,3 +106,7 @@ Here is what the output of generating configuration for `requirejs-configurator`
   }]
 };
 ```
+
+# Example project
+
+See a fully working example [over here](example).

@@ -1,6 +1,6 @@
 {
   "name": "requirejs-configurator",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A generic require.js configuration generator for npm style projects",
   "main": "index.js",
   "scripts": {

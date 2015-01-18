@@ -9,12 +9,14 @@ Here we load a bunch of modules from npm, some of which have nested deps. As you
 # Running the example
 
 ```
+git clone git@github.com:QubitProducts/requirejs-configurator.git
+cd requirejs-configurator/example
 npm install
 npm start
 open http://localhost:8000
 ```
 
-To regenerate the config (if you install new npm deps) run
+To regenerate the config (after you install/uninstall npm deps) run
 
 ```
 npm rc

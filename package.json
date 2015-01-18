@@ -6,8 +6,14 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": {
+    "requirejs-configurator": "./bin/requirejs-configurator"
+  },
+  "authors": [
+    "Karolis Narkevicius <karolis@qubitproducts.com>",
+    "Alex Esp <alex.esp@qubitproducts.com>"
+  ],
+  "license": "MIT",
   "dependencies": {
     "lodash": "^2.4.1",
     "ramda": "^0.4.0",

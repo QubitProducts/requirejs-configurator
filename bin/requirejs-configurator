@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+var path = require("path");
+var R = require("ramda");
+var rc = require("../");
+
+var cwd = process.cwd();
+
+if (!R.contains("--npm", process.argv)) {
+  console.error("Please provide the type of the package manager. e.g. --npm");
+  process.exit(1);
+}
+
+var projectDir;
+var relativeDir = R.reject(R.eq("--npm"), R.slice.from(2)(process.argv))[0];
+projectDir = path.resolve(cwd, relativeDir || ".");
+
+rc.npm(projectDir).then(function (config) {
+  console.log("require.config(" + JSON.stringify(config, null, 2) + ");");
+}).otherwise(function (err) {
+  console.error(err);
+  process.exit(1);
+});

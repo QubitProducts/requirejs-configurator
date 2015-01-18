@@ -51,6 +51,12 @@ Note that the `options.resolve` function can either take a callback or return a 
 There's a small command line tool bundled with `requirejs-configurator` which can generate a configuration file for npm based projects, use it like so:
 
 ```
+npm install -g requirejs-configurator
+```
+
+and then
+
+```
 requirejs-configurator --npm . > config.js
 ```
 

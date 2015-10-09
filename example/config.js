@@ -1,7 +1,3 @@
-args
-[ 'node',
-  '/Users/karolis/Documents/workspace/requirejs-configurator/bin/requirejs-configurator',
-  '--npm' ]
 require.config({
   "map": {
     "*": {

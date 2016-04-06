@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+var include_dev_deps;
 var path = require("path");
 var R = require("ramda");
 var rc = require("../");
@@ -11,11 +12,15 @@ if (!R.contains("--npm", process.argv)) {
   process.exit(1);
 }
 
+if (R.contains("--include-dev-deps", process.argv)) {
+  include_dev_deps = 1;
+}
+
 var projectDir;
-var relativeDir = R.reject(R.eq("--npm"), R.slice.from(2)(process.argv))[0];
+var relativeDir = R.reject(R.anyPredicates([R.eq("--npm"), R.eq("--include-dev-deps")]), R.slice.from(2)(process.argv))[0];
 projectDir = path.resolve(cwd, relativeDir || ".");
 
-rc.npm(projectDir).then(function (config) {
+rc.npm(projectDir, undefined, include_dev_deps).then(function (config) {
   console.log("require.config(" + JSON.stringify(config, null, 2) + ");");
 }).otherwise(function (err) {
   console.error(err);

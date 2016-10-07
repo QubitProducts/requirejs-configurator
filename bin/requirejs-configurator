@@ -5,17 +5,24 @@ var R = require("ramda");
 var rc = require("../");
 
 var cwd = process.cwd();
+var includeDevDeps = false;
 
 if (!R.contains("--npm", process.argv)) {
   console.error("Please provide the type of the package manager. e.g. --npm");
   process.exit(1);
 }
 
+if (R.contains("--include-dev-dependencies", process.argv) || R.contains("-D", process.argv)) {
+  includeDevDeps = true;
+}
+
 var projectDir;
-var relativeDir = R.reject(R.eq("--npm"), R.slice.from(2)(process.argv))[0];
+var relativeDir = R.reject(R.anyPredicates([R.eq("--npm"), R.eq("--include-dev-dependencies"), R.eq('-D')]), R.slice.from(2)(process.argv))[0];
 projectDir = path.resolve(cwd, relativeDir || ".");
 
-rc.npm(projectDir).then(function (config) {
+rc.npm(projectDir, undefined, {
+  includeDevDeps: includeDevDeps
+}).then(function (config) {
   console.log("require.config(" + JSON.stringify(config, null, 2) + ");");
 }).otherwise(function (err) {
   console.error(err);

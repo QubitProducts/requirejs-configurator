@@ -62,6 +62,32 @@ requirejs-configurator --npm . > config.js
 
 This assumes that `node_modules` will be served at your require.js baseUrl. If that's not the case, you'll have to use the programmatic API and modify the generated configuration by looping over the packages array and updating the location fields.
 
+# Include devDependencies
+
+NPM package.json devDependencies can be included programatically:
+
+```js
+```js
+rc.npm("path/to/my/project").then(function () {
+  console.log(config);
+}, 1);
+```
+
+or
+
+```js
+rc.npm("path/to/my/project", function (err, config) {
+  console.log(config);
+}, 1);
+```
+```
+
+And using the CLI
+
+```sh
+requirejs-configurator --npm --include-dev-deps . > config.js
+```
+
 # Example output
 
 Here is what the output of generating configuration for `requirejs-configurator` itself looks like (+ Backbone just to demonstrate nested dependencies). With such configuration, it's then possible to call `require("lodash")` or `require("lodash@2.4.1")` or `require("lodash@^2.4.1")` and all nested dependencies are resolved correctly since they're configured in the map.

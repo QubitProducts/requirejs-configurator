@@ -13,10 +13,15 @@ var output = {
     'backbone@1.1.2': {
       underscore: 'underscore@1.7.0'
     },
+    'foo@1.0.0': {
+      bar: 'bar@1.0.0'
+    },
     '*': {
       '@qubit/moment@^2.8.3': '@qubit/moment@2.8.3',
       'when@^3.4.4': 'when@3.4.4',
-      'underscore@>=1.5.0': 'underscore@1.7.0'
+      'underscore@>=1.5.0': 'underscore@1.7.0',
+      'foo@^1.0.0': 'foo@1.0.0',
+      'bar@^1.0.0': 'bar@1.0.0'
     }
   },
   packages: [{
@@ -31,6 +36,49 @@ var output = {
     location: 'pkg/@qubit/moment@2.8.3',
     main: './moment.js',
     name: '@qubit/moment@2.8.3'
+  }, {
+    name: 'foo@1.0.0',
+    main: 'index',
+    location: 'pkg/foo@1.0.0'
+  }, {
+    name: 'underscore@1.7.0',
+    main: 'underscore.js',
+    location: 'pkg/underscore@1.7.0'
+  }, {
+    name: 'bar@1.0.0',
+    main: 'index',
+    location: 'pkg/bar@1.0.0'
+  }]
+};
+
+var output_wo_peer_deps = {
+  map: {
+    'backbone@1.1.2': {
+      underscore: 'underscore@1.7.0'
+    },
+    '*': {
+      '@qubit/moment@^2.8.3': '@qubit/moment@2.8.3',
+      'when@^3.4.4': 'when@3.4.4',
+      'underscore@>=1.5.0': 'underscore@1.7.0',
+      'foo@^1.0.0': 'foo@1.0.0'
+    }
+  },
+  packages: [{
+    name: 'backbone@1.1.2',
+    main: 'backbone.js',
+    location: 'pkg/backbone@1.1.2'
+  }, {
+    name: 'when@3.4.4',
+    main: 'when',
+    location: 'pkg/when@3.4.4'
+  }, {
+    location: 'pkg/@qubit/moment@2.8.3',
+    main: './moment.js',
+    name: '@qubit/moment@2.8.3'
+  }, {
+    name: 'foo@1.0.0',
+    main: 'index',
+    location: 'pkg/foo@1.0.0'
   }, {
     name: 'underscore@1.7.0',
     main: 'underscore.js',
@@ -58,6 +106,19 @@ describe("rc.generate", function () {
       if (err) return done(err);
       config.packages = rewriteLocation(config.packages);
       expect(config).to.deep.equal(output);
+      done();
+    });
+  });
+ it("supports node style API (With excluding peerDependencies)", function (done) {
+    var root = path.join(__dirname, "fixture");
+    rc.generate({
+      dependencies: readDependencies(root),
+      resolve: makeResolveNodeStyle(root),
+      excludePeerDeps: true
+    }, function (err, config) {
+      if (err) return done(err);
+      config.packages = rewriteLocation(config.packages);
+      expect(config).to.deep.equal(output_wo_peer_deps);
       done();
     });
   });

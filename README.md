@@ -92,6 +92,36 @@ And using the CLI
 requirejs-configurator --npm --include-dev-dependencies . > config.js
 ```
 
+# Exclude peerDependencies
+
+NPM package.json peerDependencies can be exclude programatically:
+
+```js
+```js
+rc.npm("path/to/my/project").then(function () {
+  console.log(config);
+}, {
+  excludePeerDeps: true
+});
+```
+
+or
+
+```js
+rc.npm("path/to/my/project", function (err, config) {
+  console.log(config);
+}, {
+  excludePeerDeps: true
+});
+```
+```
+
+And using the CLI
+
+```sh
+requirejs-configurator --npm --exclude-peer-dependencies . > config.js
+```
+
 # Example output
 
 Here is what the output of generating configuration for `requirejs-configurator` itself looks like (+ Backbone just to demonstrate nested dependencies). With such configuration, it's then possible to call `require("lodash")` or `require("lodash@2.4.1")` or `require("lodash@^2.4.1")` and all nested dependencies are resolved correctly since they're configured in the map.

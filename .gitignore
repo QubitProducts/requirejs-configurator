@@ -2,3 +2,6 @@
 node_modules
 !test/fixture/node_modules
 !test/fixture/node_modules/backbone/node_modules
+!test/fixture/node_modules/mocha/node_modules
+!test/fixture/node_modules/chai/node_modules
+!test/fixture/node_modules/chai/node_modules/deep-eql/node_modules

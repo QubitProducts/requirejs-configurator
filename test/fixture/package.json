@@ -8,14 +8,15 @@
   "dependencies": {
     "backbone": "1.1.2",
     "when": "^3.4.4",
-    "@qubit/moment": "^2.8.3"
+    "@qubit/moment": "^2.8.3",
+    "foo": "^1.0.0"
   },
   "browser": {
     "index": "../browser",
     "promise": "when"
   },
   "devDependencies": {
-    "chai": "^1.9.1",
-    "mocha": "^1.21.4"
-  }
+    "chai": "1.9.1",
+    "mocha": "1.21.4"
+  }  
 }

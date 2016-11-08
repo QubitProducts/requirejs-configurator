@@ -89,7 +89,7 @@ rc.npm("path/to/my/project", function (err, config) {
 And using the CLI
 
 ```sh
-requirejs-configurator --npm --include-dev-dependencies . > config.js
+requirejs-configurator --npm --include-dev . > config.js
 ```
 
 # Example output

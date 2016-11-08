@@ -12,7 +12,7 @@ if (!R.contains("--npm", process.argv)) {
   process.exit(1);
 }
 
-if (R.contains("--include-dev-dependencies", process.argv) || R.contains("-D", process.argv)) {
+if (R.contains("--include-dev", process.argv) || R.contains("-D", process.argv)) {
   includeDevDeps = true;
 }
 

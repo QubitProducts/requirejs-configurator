@@ -131,16 +131,27 @@ describe("rc.npm", function () {
     });
   });
   it("generates configuration that includes devDependencies", function() {
-    return rc.npm(path.join(__dirname, "fixture"), undefined, {
+    return rc.npm(path.join(__dirname, "fixture"), {
       includeDevDeps: true
     }).then(function (config) {
       expect(config).to.deep.equal(outputWithDevDependencies);
     });
   });
-  it("supports node style API", function (done) {
-    rc.npm(path.join(__dirname, "fixture"), function (err, config) {
-      expect(config).to.deep.equal(output);
-      done();
+
+  describe("supports node style API", function () {
+    it("when no options are used", function (done) {
+      rc.npm(path.join(__dirname, "fixture"), function (err, config) {
+        expect(config).to.deep.equal(output);
+        done();
+      });
+    });
+    it("when options are used", function(done) {
+      rc.npm(path.join(__dirname, "fixture"), {
+        includeDevDeps: true
+      }, function (err, config) {
+        expect(config).to.deep.equal(outputWithDevDependencies);
+        done();
+      });
     });
   });
 });

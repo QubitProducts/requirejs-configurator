@@ -68,20 +68,16 @@ NPM package.json devDependencies can be included programatically:
 
 ```js
 ```js
-rc.npm("path/to/my/project").then(function () {
+rc.npm("path/to/my/project", { includeDevDeps: true }).then(function () {
   console.log(config);
-}, {
-  includeDevDeps: true
 });
 ```
 
 or
 
 ```js
-rc.npm("path/to/my/project", function (err, config) {
+rc.npm("path/to/my/project", { includeDevDeps: true }, function (err, config) {
   console.log(config);
-}, {
-  includeDevDeps: true
 });
 ```
 ```
@@ -89,7 +85,7 @@ rc.npm("path/to/my/project", function (err, config) {
 And using the CLI
 
 ```sh
-requirejs-configurator --npm --include-dev . > config.js
+requirejs-configurator --npm --include-dev-deps . > config.js
 ```
 
 # Example output

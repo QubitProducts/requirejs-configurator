@@ -20,21 +20,21 @@ var output = {
     }
   },
   packages: [{
-    name: 'backbone@1.1.2',
-    main: 'backbone.js',
-    location: 'pkg/backbone@1.1.2'
-  }, {
-    name: 'when@3.4.4',
-    main: 'when',
-    location: 'pkg/when@3.4.4'
-  }, {
     location: 'pkg/@qubit/moment@2.8.3',
     main: './moment.js',
     name: '@qubit/moment@2.8.3'
   }, {
+    name: 'backbone@1.1.2',
+    main: 'backbone.js',
+    location: 'pkg/backbone@1.1.2'
+  }, {
     name: 'underscore@1.7.0',
     main: 'underscore.js',
     location: 'pkg/underscore@1.7.0'
+  }, {
+    name: 'when@3.4.4',
+    main: 'when',
+    location: 'pkg/when@3.4.4'
   }]
 };
 

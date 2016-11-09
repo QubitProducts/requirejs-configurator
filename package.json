@@ -4,7 +4,7 @@
   "description": "A generic require.js configuration generator for npm style projects",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && standard"
   },
   "bin": {
     "requirejs-configurator": "./bin/requirejs-configurator"
@@ -20,13 +20,21 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^2.4.1",
+    "pkguid": "^1.1.1",
     "ramda": "^0.4.0",
     "resolve": "^1.0.0",
-    "when": "^3.4.4",
-    "pkguid": "^1.1.1"
+    "standard": "^8.5.0",
+    "when": "^3.4.4"
   },
   "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.21.4"
+  },
+  "standard": {
+    "global": [
+      "describe",
+      "it",
+      "define"
+    ]
   }
 }
